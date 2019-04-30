@@ -11,17 +11,6 @@
 
 function err() { 1>&2 echo "$0: error $@"; return 1; }
 
-function parameters () {
-  while getopts "b:" opt;
-  do
-    case $opt in
-      b) BINARY="$OPTARG" ;;
-      :) err "Option -$OPTARG requires an argument.";;
-      \?) err "Invalid option: -$OPTARG";;
-    esac
-  done
-}
-
 function unpack() {
   rm -rf $HOME/go/tools/go
   tar -C $HOME/go/tools -xzvf $BINARY
@@ -49,10 +38,19 @@ function go_tool_version () {
   echo ""  
 }
 
-if [ -z "$1" ]; then
+while getopts "b:" opt;
+do
+  case $opt in
+    b) BINARY="$OPTARG" ;;
+    :) err "Option -$OPTARG requires an argument.";;
+    \?) err "Invalid option: -$OPTARG";;
+  esac
+done
+
+if [ -z "$BINARY" ]; then
   echo "The option: -b go_binary.tar.gz is missing!"
 else
-  parameters
+  echo $BINARY
   unpack
   env
   go_tool_version
