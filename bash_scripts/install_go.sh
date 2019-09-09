@@ -5,6 +5,8 @@
 # TODO:
 # [] Download the last version from:  https://golang.org/dl/
 # [] Make TEST
+# [] Incorporate > https://gist.github.com/romelgomez/8d515c2d649a4db55ced57195350c268
+# [] Incorporate > https://gist.github.com/romelgomez/0874e88aed0b328f8b4319dc072a2005
 
 # Parameters:
 # -b go_binary.tar.gz
