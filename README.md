@@ -18,4 +18,4 @@
 
 ---
 
-### Better skills = A better life
+> Better skills = A better life
