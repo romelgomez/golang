@@ -1,16 +1,14 @@
-# Go Learning
-
-## Install Go Tools
+# Install Go Tools
 
 1) Download a binary release suitable for your system in [https://golang.org/dl/](https://golang.org/dl/)
 
 2) Open an terminal, stay in $HOME
 3) `git clone https://github.com/romelgomez/go.git`
-4) `source bash_scripts/install_go.sh -b go_binary.tar.gz`
+4) `source go/install_go_tools.sh -b go_binary.tar.gz`
   
     Example:
 
-    `source go/bash_scripts/install_go.sh -b $HOME/Downloads/go1.12.4.linux-amd64.tar.gz`
+    `source go/install_go_tools.sh -b $HOME/Downloads/go1.12.4.linux-amd64.tar.gz`
 
 5) Is done, the go tools are installed now.
 
