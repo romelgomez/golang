@@ -19,14 +19,23 @@ function unpack() {
 }
 
 function env () {
-  if [[ -z "$GOROOT" ]]; then
+  if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
+  
       export GOROOT=$HOME/go/tools/go
       export PATH=$PATH:$GOROOT/bin
 
+      export GOPATH=$HOME/go
+      export PATH=$PATH:$GOPATH/bin
+
       echo '' >> ~/.bashrc
       echo '# Golang' >> ~/.bashrc
+
       echo 'export GOROOT=$HOME/go/tools/go' >> ~/.bashrc
       echo 'export PATH=$PATH:$GOROOT/bin' >> ~/.bashrc    
+
+      echo 'export GOPATH=$HOME/go' >> ~/.bashrc
+      echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.bashrc    
+
       echo '' >> ~/.bashrc
   fi
 }
