@@ -57,6 +57,10 @@ function env () {
             
       ' >> ~/.profile && source ~/.profile
 
+      echo 'source ~/.profile' >> ~/.zshrc
+      
+      echo 'source ~/.profile' >> ~/.bashrc
+
   fi
 }
 
