@@ -1,53 +1,65 @@
 #!/bin/bash
 
-# Install Golang Tools
-# ....................
-# TODO:
-# [] Download the last version from:  https://golang.org/dl/
-# [] Make TEST
-# [] Incorporate > https://gist.github.com/romelgomez/8d515c2d649a4db55ced57195350c268
-# [] Incorporate > https://gist.github.com/romelgomez/0874e88aed0b328f8b4319dc072a2005
-
 # Parameters:
 # -b go_binary.tar.gz
 
 function err() { 1>&2 echo "$0: error $@"; return 1; }
 
-function unpack() {
+function downloadLatestGo () {
+  GOURLREGEX='https://dl.google.com/go/go[0-9\.]+\.linux-amd64.tar.gz'
+  echo "Finding latest version of Go for AMD64..."
+  url="$(wget -qO- https://golang.org/dl/ | grep -oP 'https:\/\/dl\.google\.com\/go\/go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 )"
+  latest="$(echo $url | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2 )"
+  echo "Downloading latest Go for AMD64: ${latest}"
+  wget --quiet --continue --show-progress "${url}" -P $HOME/go/dl
+  unset url
+  unset GOURLREGEX
+}
+
+function removeGoTools () {
   rm -rf $HOME/go/tools/go
-  tar -C $HOME/go/tools -xzvf $BINARY
+}
+
+function removeDownload () {
+  find $HOME/go/dl -name "go*" -type f -delete
 }
 
 function env () {
   if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
   
+      # tools
+      export GOROOT=$HOME/go/tools
+      export PATH=$PATH:$GOROOT/bin
+
+      # libraries 
+      export GOPATH=$HOME/go/libraries
+      export PATH=$PATH:$GOPATH/bin
+
+      # workspace
+      export GOPATH=$GOPATH:$HOME/go/workspace
+
+      echo '
+      
+      #[Golang].................................
+      
+      # tools
       export GOROOT=$HOME/go/tools/go
       export PATH=$PATH:$GOROOT/bin
 
-      export GOPATH=$HOME/go
+      # libraries
+      export GOPATH=$HOME/go/libraries
       export PATH=$PATH:$GOPATH/bin
 
-      echo '' >> ~/.bashrc
-      echo '# Golang' >> ~/.bashrc
+      # workspace
+      export GOPATH=$GOPATH:$HOME/go/workspace
 
-      echo 'export GOROOT=$HOME/go/tools/go' >> ~/.bashrc
-      echo 'export PATH=$PATH:$GOROOT/bin' >> ~/.bashrc    
+      #.................................[/Golang]
+            
+      ' >> ~/.profile && source ~/.profile
 
-      echo 'export GOPATH=$HOME/go' >> ~/.bashrc
-      echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.bashrc    
-
-      echo '' >> ~/.bashrc
   fi
 }
 
-function go_tool_version () {
-  echo ""
-  echo "The Go tool version installed is:"
-  echo "------------------------------"  
-  go version
-  echo "------------------------------"  
-  echo ""  
-}
 
 while getopts "b:" opt;
 do
@@ -59,10 +71,37 @@ do
 done
 
 if [ -z "$BINARY" ]; then
-  echo "The option: -b go_binary.tar.gz is missing!"
-else
-  echo $BINARY
-  unpack
+
+  echo "
+   NOTE: The optional option: -b go_binary.tar.gz is missing.
+
+   Trying to download the latest Go binary.
+  "
+
+  downloadLatestGo
+
+  LATEST="$(find $HOME/go/dl -name "go*" -type f | head -n 1)"
+
+  removeGoTools
+
+  tar -C $HOME/go/tools -xzvf $LATEST
+
   env
-  go_tool_version
+
+  removeDownload
+
+  go version
+
+else
+
+  echo $BINARY
+
+  removeGoTools
+
+  tar -C $HOME/go/tools -xzvf $BINARY
+
+  env
+  
+  go version
+
 fi

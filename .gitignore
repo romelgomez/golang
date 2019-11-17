@@ -1,5 +1,17 @@
 tools/go
+dl/*.gz
 .vscode
+libraries/pkg/*
+libraries/bin/*
+libraries/src/*
+
+# Any project should have their own repository.
+workspace/pkg/*
+!workspace/pkg/*.gitkeep
+workspace/bin/*
+!workspace/bin/*.gitkeep
+workspace/src/*
+!workspace/src/*.gitkeep
 
 
 .DS_Store

@@ -1,19 +1,31 @@
-# Install Go Tools
+# Install Go Tools in UBUNTU
 
-1) Download a binary release suitable for your system in [https://golang.org/dl/](https://golang.org/dl/)
+To instal the go tools with this script, you has two options:
 
-2) Open an terminal, stay in $HOME
-3) `git clone https://github.com/romelgomez/go.git`
-4) `source go/install_go_tools.sh -b go_binary.tar.gz`
-  
+1.  Let the script install the lasted version of go tools.
+
+    **a)** Open an terminal, stay in `$HOME`
+
+    **b)** `git clone https://github.com/romelgomez/go.git`
+
+    **c)** `. ./go/install_go_tools.sh`
+
+2.  Pass the desirable version that you need to install with the flag `-b`
+
+    **a)** Download a binary release suitable for your system in [https://golang.org/dl/](https://golang.org/dl/)
+
+    **b)** Open an terminal, stay in \$HOME
+
+    **c)** `git clone https://github.com/romelgomez/go.git`
+
+    **d)** - `. ./go/install_go_tools.sh -b go_binary.tar.gz`
+
     Example:
 
-    `source go/install_go_tools.sh -b $HOME/Downloads/go1.12.4.linux-amd64.tar.gz`
+    `. ./go/install_go_tools.sh -b $HOME/Downloads/go1.12.4.linux-amd64.tar.gz`
 
-5) Is done, the go tools are installed now.
+## NOTES
 
-    NOTE:  To update-change the version, change the value of `-b` property which it is passed to the installer, `go_binary.tar.gz` and run again.
+- To update or change the version, run again.
 
----
-
-> Better skills = A better life
+`Better skills = A better life`
