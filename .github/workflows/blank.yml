@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Go Tools
+      run: . ./go/install_go_tools.sh
+    - name: Log the installed Go Verison
+      run: go version
