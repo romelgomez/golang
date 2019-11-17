@@ -11,20 +11,23 @@ function downloadLatestGo () {
   url="$(wget -qO- https://golang.org/dl/ | grep -oP 'https:\/\/dl\.google\.com\/go\/go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 )"
   latest="$(echo $url | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2 )"
   echo "Downloading latest Go for AMD64: ${latest}"
-  wget --quiet --continue --show-progress "${url}" -P $HOME/go/dl
+  wget --quiet --continue --show-progress "${url}" -P $HOME/go/tools
   unset url
   unset GOURLREGEX
 }
 
 function removeGoTools () {
+  echo "Removing old go tools if it exists"
   rm -rf $HOME/go/tools/go
 }
 
 function removeDownload () {
-  find $HOME/go/dl -name "go*" -type f -delete
+  echo "Removing Download"
+  find $HOME/go/tools -name "*.tar.gz" -type f -delete
 }
 
 function env () {
+  echo "Setting the environment variables"
   if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
   
       # tools
@@ -58,7 +61,7 @@ function env () {
       ' >> ~/.profile && source ~/.profile
 
       echo 'source ~/.profile' >> ~/.zshrc
-      
+
       echo 'source ~/.profile' >> ~/.bashrc
 
   fi
@@ -84,11 +87,13 @@ if [ -z "$BINARY" ]; then
 
   downloadLatestGo
 
-  LATEST="$(find $HOME/go/dl -name "go*" -type f | head -n 1)"
+  LATEST="$(find $HOME/go/tools -name "go*" -type f | head -n 1)"
+
+  echo "LATEST: ${LATEST}"
 
   removeGoTools
 
-  tar -C $HOME/go/tools -xzvf $LATEST
+  tar -xzvf $LATEST --directory $HOME/go/tools
 
   env
 
