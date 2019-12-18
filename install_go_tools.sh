@@ -30,39 +30,40 @@ function env () {
   echo "Setting the environment variables"
   if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
   
-      # tools
-      export GOROOT=$HOME/go/tools
-      export PATH=$PATH:$GOROOT/bin
+    # GOROOT
+    export GOROOT=$HOME/go/tools/go
+    export PATH=$PATH:$GOROOT/bin
 
-      # libraries 
-      export GOPATH=$HOME/go/libraries
-      export PATH=$PATH:$GOPATH/bin
+    # GOPATH
+    LIBRARIES=$HOME/go/libraries
+    WORKSPACE=$HOME/go/workspace
 
-      # workspace
-      export GOPATH=$GOPATH:$HOME/go/workspace
+    export GOPATH=$LIBRARIES:$WORKSPACE
 
-      echo '
-      
-      #[Golang].................................
-      
-      # tools
-      export GOROOT=$HOME/go/tools/go
-      export PATH=$PATH:$GOROOT/bin
+    export PATH=$PATH:$LIBRARIES/bin:$WORKSPACE/bin
+    echo '
 
-      # libraries
-      export GOPATH=$HOME/go/libraries
-      export PATH=$PATH:$GOPATH/bin
+    #[Golang].................................
 
-      # workspace
-      export GOPATH=$GOPATH:$HOME/go/workspace
+    # GOROOT
+    export GOROOT=$HOME/go/tools/go
+    export PATH=$PATH:$GOROOT/bin
 
-      #.................................[/Golang]
-            
-      ' >> ~/.profile && source ~/.profile
+    # GOPATH
+    LIBRARIES=$HOME/go/libraries
+    WORKSPACE=$HOME/go/workspace
 
-      echo 'source ~/.profile' >> ~/.zshrc
+    export GOPATH=$LIBRARIES:$WORKSPACE
 
-      echo 'source ~/.profile' >> ~/.bashrc
+    export PATH=$PATH:$LIBRARIES/bin:$WORKSPACE/bin
+
+    #.................................[/Golang]
+        
+    ' >> ~/.profile && source ~/.profile
+
+    echo 'source ~/.profile' >> ~/.zshrc
+
+    echo 'source ~/.profile' >> ~/.bashrc
 
   fi
 }
