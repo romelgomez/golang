@@ -2,7 +2,7 @@
 
 To instal the go tools with this script, you has two options:
 
-1.  Let the script install the lasted version of go tools.
+1. Let the script install the lasted version of go tools.
 
     **a)** Open an terminal, stay in `$HOME`
 
@@ -10,7 +10,7 @@ To instal the go tools with this script, you has two options:
 
     **c)** `. ./go/install_go_tools.sh`
 
-2.  Pass the desirable version that you need to install with the flag `-b`
+2. Pass the desirable version that you need to install with the flag `-b`
 
     **a)** Download a binary release suitable for your system in [https://golang.org/dl/](https://golang.org/dl/)
 
