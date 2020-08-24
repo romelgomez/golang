@@ -6,15 +6,6 @@ echo "
 
 "
 
-
-GOTOOLS=$HOME/go/tools
-
-if [ ! -z "$1" ]; then
-    GOTOOLS=$1
-fi
-
-mkdir -p $GOTOOLS
-
 DL_HOME=https://golang.org
 
 echo "Finding latest version of Go for AMD64..."
@@ -30,12 +21,12 @@ latest="$(echo $DL_PATH_URL | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head
 
 echo "Downloading latest Go for AMD64: ${latest}"
 
-wget --no-check-certificate --continue --show-progress "$DL_HOME$DL_PATH_URL" -P $GOTOOLS
+wget --no-check-certificate --continue --show-progress "$DL_HOME$DL_PATH_URL" -P $PWD/.tools
 
 unset DL_PATH_URL
 
-LATEST="$(find $GOTOOLS -name "go*" -type f | head -n 1)"
+GOTOOL_FILE="$(find $PWD/.tools -name "go*.tar.gz" -type f | head -n 1)"
 
-echo "LATEST: ${LATEST}"
+echo "LATEST: ${GOTOOL_FILE}"
 
-tar -xzvf $LATEST --directory $GOTOOLS
+tar -xzvf $GOTOOL_FILE --directory $PWD/.tools

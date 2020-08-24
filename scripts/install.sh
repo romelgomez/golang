@@ -1,12 +1,6 @@
 #!/bin/bash
 
-cd $HOME
-
-GOTOOLS=$HOME/go/tools
-
-if [ ! -z "$1" ]; then
-    GOTOOLS=$1
-fi
+. scripts/config.sh
 
 function err() { 1>&2 echo "$0: error $@"; return 1; }
 
@@ -29,7 +23,7 @@ if [ -z "$BINARY" ]; then
 
   . scripts/enviroment.sh
 
-  . scripts/del_go_tools_download.sh
+  #. scripts/del_go_tools_download.sh
 
   go version
 

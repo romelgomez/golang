@@ -1,9 +1,16 @@
 tools/go
+tools/*.gz
+.tools/*.gz
 dl/*.gz
 .vscode
-libraries/pkg/*
-libraries/bin/*
-libraries/src/*
+go_modules/pkg/*
+go_modules/bin/*
+go_modules/src/*
+.vscode
+.venv
+go
+
+
 
 # Any project should have their own repository.
 workspace/pkg/*

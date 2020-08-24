@@ -1,14 +1,18 @@
-echo "..:: Setting the environment variables \n"
+#!/bin/bash
+
+. clean_path.sh
 
 if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
 
-echo '
+echo "..:: Setting the environment variables \n"
 
-export GOROOT=$HOME/go/tools/go
-export GOPATH=$HOME/go/libraries:$HOME/go/workspace
-export PATH=$PATH:$GOROOT/bin:$HOME/go/libraries/bin:$HOME/go/workspace/bin
+echo "
 
-' >> ~/.profile && source ~/.profile
+export GOROOT=$PWD/.tools/go
+export GOPATH=$PWD/go_modules:$PWD/workspace
+export PATH=$PATH:$GOROOT/bin:$PWD/go_modules/bin:$PWD/workspace/bin
+
+" >> ~/.profile && source ~/.profile
 
 echo 'source ~/.profile' >> ~/.zshrc
 echo 'source ~/.profile' >> ~/.bashrc
