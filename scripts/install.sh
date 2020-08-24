@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. scripts/config.sh
-
 function err() { 1>&2 echo "$0: error $@"; return 1; }
 
 while getopts "b:" opt;
