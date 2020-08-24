@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. clean_path.sh
+. scripts/clean_path.sh
 
 if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
 

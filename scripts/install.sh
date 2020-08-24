@@ -21,7 +21,7 @@ if [ -z "$BINARY" ]; then
 
   . scripts/enviroment.sh
 
-  #. scripts/del_go_tools_download.sh
+  . scripts/del_go_tools_download.sh
 
   go version
 
