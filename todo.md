@@ -1,5 +1,7 @@
 # TODO:
 
+- [ ] Re - View https://www.youtube.com/watch?v=YS4e4q9oBaU&t=883s
+
 - [ ] Make TESTs
 
 - [ ] Review  https://gist.github.com/romelgomez/8d515c2d649a4db55ced57195350c268
