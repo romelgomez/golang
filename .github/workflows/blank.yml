@@ -10,6 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Go Tools
-      run: . scripts/install.sh
+      run: . install.sh
     - name: Log the installed Go Verison
       run: go version
