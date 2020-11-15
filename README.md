@@ -38,10 +38,12 @@ after install some dependencies for example: `go get github.com/pkg/errors`
 
 the files of the pkg error will be in: `go_modules/src/github.com/pkg/errors`
 
+![go_module_example](.project_images/go_module_example.png)
+
 ### `/workspace`
 
 `/workspace` folder is where all the work related to your project will live
 
-
+![workspace_example](.project_images/workspace_example.png)
 
 `Better skills = A better life`
