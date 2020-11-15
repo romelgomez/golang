@@ -87,9 +87,9 @@ function enviroment() {
     if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
         GOROOT=$GO_MODULES/go
 
-        GOPATH=$GO_MODULES:$PWD/src
+        GOPATH=$GO_MODULES:$PWD/workspace
 
-        PATH=$PATH:$GOROOT/bin:$GO_MODULES/bin:$PWD/src/bin
+        PATH=$PATH:$GOROOT/bin:$GO_MODULES/bin:$PWD/workspace/bin
 
         GOLANG_SETTINGS="
             # [start] Golang settings, remove after change the installation folder.
