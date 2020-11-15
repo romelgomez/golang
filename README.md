@@ -34,8 +34,14 @@ Call `. ./install.sh` script again.
 - The go tools
 - The vendors modules or vendor pkg
 
-### `/src`
+after install some dependencies for example: `go get github.com/pkg/errors`
 
-`/src` folder is where all the work related to you project will live
+the files of the pkg error will be in: `go_modules/src/github.com/pkg/errors`
+
+### `/workspace`
+
+`/workspace` folder is where all the work related to your project will live
+
+
 
 `Better skills = A better life`
