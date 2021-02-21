@@ -83,7 +83,7 @@ function enviroment() {
         SETTING_GOROOT="export GOROOT=$PWD/go"
         SETTING_PATH='export PATH=$PATH:$GOROOT/bin'
 
-        # save in .zshrc file
+        echo "save in .zshrc file" 
 
         echo "" >>~/.zshrc
         echo "# [start] Golang settings, remove after change the installation folder." >>~/.zshrc
@@ -92,7 +92,7 @@ function enviroment() {
         echo "# [end]" >>~/.zshrc
         echo "" >>~/.zshrc
 
-        # save in bashrc file
+        echo "save in bashrc file" 
 
         echo "" >>~/.bashrc
         echo "# [start] Golang settings, remove after change the installation folder." >>~/.bashrc
@@ -101,9 +101,13 @@ function enviroment() {
         echo "# [end]" >>~/.bashrc
         echo "" >>~/.bashrc
 
+        echo $SHELL
+
         if [ "$SHELL" = "/usr/bin/zsh" ]; then
+            echo "source ~/.zshrc" 
             source ~/.zshrc
         else
+            echo "source ~/.bashrc" 
             source ~/.bashrc
         fi
 
