@@ -4,8 +4,6 @@ Install the latest go tools and start working.
 
 Tested with
 
-- [https://ohmyz.sh/](https://ohmyz.sh/) terminal.
-
 - Ubuntu 20.04.1 LTS
 
 ## Install
