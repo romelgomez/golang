@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 function del_go_tools_download() {
 
