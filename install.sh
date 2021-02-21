@@ -1,12 +1,10 @@
-#!/bin/bash
-
-GO_MODULES=$PWD/go_modules
+#!/bin/zsh
 
 function del_go_tools_download() {
 
     echo "Removing Download if it exists"
 
-    find $GO_MODULES -name "*.tar.gz" -type f -delete
+    find $PWD -name "*.tar.gz" -type f -delete
 
 }
 
@@ -14,7 +12,7 @@ function del_go_tools_folder() {
 
     echo "Removing old go tools if it exists"
 
-    rm -rf $GO_MODULES/go
+    rm -rf $PWD/go
 
 }
 
@@ -64,44 +62,51 @@ function go_tools() {
 
     echo "Downloading latest Go for AMD64: ${latest}"
 
-    wget --no-check-certificate --continue --show-progress "$DL_HOME$DL_PATH_URL" -P $GO_MODULES
+    wget --no-check-certificate --continue --show-progress "$DL_HOME$DL_PATH_URL" -P $PWD
 
     unset DL_PATH_URL
 
-    GOTOOL_FILE="$(find $GO_MODULES -name "go*.tar.gz" -type f | head -n 1)"
+    GOTOOL_FILE="$(find $PWD -name "go*.tar.gz" -type f | head -n 1)"
 
     echo "LATEST: ${GOTOOL_FILE}"
 
-    tar -xzvf $GOTOOL_FILE --directory $GO_MODULES
+    tar -xzvf $GOTOOL_FILE --directory $PWD
 
 }
 
 function enviroment() {
 
-    echo "
-        ..:: Setting the environment variables for golang
-    "
-
-    clean_path
+    echo "..:: Setting the environment variables for golang"
 
     if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
-        GOROOT=$GO_MODULES/go
 
-        GOPATH=$GO_MODULES:$PWD/workspace
+        SETTING_GOROOT="export GOROOT=$PWD/go"
+        SETTING_PATH='export PATH=$PATH:$GOROOT/bin'
 
-        PATH=$PATH:$GOROOT/bin:$GO_MODULES/bin:$PWD/workspace/bin
+        # save in .zshrc file
 
-        GOLANG_SETTINGS="
-            # [start] Golang settings, remove after change the installation folder.
-            export GOROOT=$GOROOT
-            export PATH=$PATH
-            export GOPATH=$GOPATH
-            # [end]
-        "
+        echo "" >>~/.zshrc
+        echo "# [start] Golang settings, remove after change the installation folder." >>~/.zshrc
+        echo $SETTING_GOROOT >>~/.zshrc
+        echo $SETTING_PATH >>~/.zshrc
+        echo "# [end]" >>~/.zshrc
+        echo "" >>~/.zshrc
 
-        echo $GOLANG_SETTINGS >>~/.zshrc
+        # save in bashrc file
 
-        echo $GOLANG_SETTINGS >>~/.bashrc
+        echo "" >>~/.bashrc
+        echo "# [start] Golang settings, remove after change the installation folder." >>~/.bashrc
+        echo $SETTING_GOROOT >>~/.bashrc
+        echo $SETTING_PATH >>~/.bashrc
+        echo "# [end]" >>~/.bashrc
+        echo "" >>~/.bashrc
+
+        if [ "$SHELL" = "/usr/bin/zsh" ]; then
+            source ~/.zshrc
+        else
+            source ~/.bashrc
+        fi
+
     fi
 
 }
