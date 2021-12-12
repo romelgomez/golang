@@ -47,7 +47,7 @@ function go_tools() {
 
     "
 
-    DL_HOME=https://golang.org
+    DL_HOME=https://go.dev
 
     echo "Finding latest version of Go for AMD64..."
 
