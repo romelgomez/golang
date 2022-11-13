@@ -1,10 +1,12 @@
 #!/bin/bash
 
+GO_INSTALL_PREFIX="/usr/lib"
+
 function del_go_tools_download() {
 
 	echo "Removing Download if it exists"
 
-	find $PWD -name "*.tar.gz" -type f -delete
+	find $GO_INSTALL_PREFIX -name "*.tar.gz" -type f -delete
 
 }
 
@@ -12,7 +14,7 @@ function del_go_tools_folder() {
 
 	echo "Removing old go tools if it exists"
 
-	rm -rf $PWD/go
+	rm -rf $GO_INSTALL_PREFIX/go
 
 }
 
@@ -62,15 +64,15 @@ function go_tools() {
 
 	echo "Downloading latest Go for i386: ${latest}"
 
-	wget --no-check-certificate --continue --show-progress "$DL_HOME$DL_PATH_URL" -P $PWD
+	wget --no-check-certificate --continue --show-progress "$DL_HOME$DL_PATH_URL" -P $GO_INSTALL_PREFIX
 
 	unset DL_PATH_URL
 
-	GOTOOL_FILE="$(find $PWD -name "go*.tar.gz" -type f | head -n 1)"
+	GOTOOL_FILE="$(find $GO_INSTALL_PREFIX -name "go*.tar.gz" -type f | head -n 1)"
 
 	echo "LATEST: ${GOTOOL_FILE}"
 
-	tar -xzvf $GOTOOL_FILE --directory $PWD
+	tar -xzvf $GOTOOL_FILE --directory $GO_INSTALL_PREFIX
 
 }
 
@@ -80,7 +82,7 @@ function enviroment() {
 
 	if [[ -z "$GOROOT" ]] || [[ -z "$GOPATH" ]]; then
 
-		SETTING_GOROOT="export GOROOT=$PWD/go"
+		SETTING_GOROOT="export GOROOT=$GO_INSTALL_PREFIX/go"
 		SETTING_PATH='export PATH=$PATH:$GOROOT/bin'
 
 		echo "save in .zshrc file"
